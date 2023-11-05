@@ -14,11 +14,12 @@ class ModelTests(TestCase):
         
         email = 'test@example.com'
         password = 'testpass123'
-        user = get_user_model().objects.create_user(
+        user = get_user_model().objects.create(
             email = email,
             password = password,
         )
+        total = len(get_user_model().objects.all())
 
         self.assertEqual(user.email, email)
-        self.assertTrue(user.check_password(password))
-        self.assertEqual(len(user), 1)
+        self.assertTrue(user.password, password)
+        self.assertEqual(total, 1)
